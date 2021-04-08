@@ -35,7 +35,7 @@ class DendaController extends Controller
     }
     public function kwitansi($id)
     {
-        $tgl = date('F - d - y');
+        $tgl = date('d F y');
         $data = Transaksi::find($id);
         $pdf = PDF::loadview('denda.kwitansi', compact('data', 'tgl'))->setPaper('a5', 'landscape');
         return $pdf->stream('kwitansi' . date('Y-m-d_H:i:s') . '.pdf');

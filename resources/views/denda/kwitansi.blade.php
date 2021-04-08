@@ -4,63 +4,66 @@
 <head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
+
     <style type="text/css">
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            color: #333;
+            text-align: left;
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .container {
+            margin: 0 auto;
+            margin-top: 35px;
+            padding: 0px;
+            width: 100%;
+            height: auto;
+            background-color: #fff;
+        }
+
+        .col-lg-3 {
+            margin: 0px;
+            width: 30%;
+        }
+
+        .col-lg-6 {
+            margin: 0px;
+            width: 60%;
+        }
+
+
+        caption {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
         table {
-            border-spacing: 0;
+            border: 0px solid #333;
+            border-collapse: collapse;
+            margin: 0 auto;
+            width: auto;
             width: 100%;
         }
 
         th {
-            background: #404853;
-            background: linear-gradient(#687587, #404853);
-            border-left: 1px solid rgba(0, 0, 0, 0.2);
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff;
-            padding: 8px;
-            text-align: left;
-            text-transform: uppercase;
-        }
-
-        th:first-child {
-            border-top-left-radius: 4px;
-            border-left: 0;
-        }
-
-        th:last-child {
-            border-top-right-radius: 4px;
-            border-right: 0;
+            border: 1px solid black;
         }
 
         td {
-            border-right: 1px solid #c6c9cc;
-            border-bottom: 1px solid #c6c9cc;
-            border-top: 1px solid #c6c9cc;
-            padding: 8px;
+            border: 1px solid black;
+            padding: 2px;
         }
 
-        td:first-child {
-            border-left: 1px solid #c6c9cc;
-        }
-
-        tr:first-child td {
-            border-top: 0;
-        }
-
-        tr:nth-child(even) td {
-            background: #e8eae9;
-        }
-
-        tr:last-child td:first-child {
-            border-bottom-left-radius: 4px;
-        }
-
-        tr:last-child td:last-child {
-            border-bottom-right-radius: 4px;
+        tr {
+            border: 1px solid black;
         }
 
         img {
-            width: 40px;
-            height: 40px;
+            width: 90px;
+            height: 90px;
             border-radius: 100%;
         }
 
@@ -68,12 +71,42 @@
             text-align: center;
         }
 
+        .left {
+            text-align: left;
+        }
+
         .right {
             text-align: right;
         }
+
+        .main-footer {
+            width: 100%;
+            height: 50px;
+            padding: 2px;
+            line-height: 50px;
+            background: white;
+            color: #333;
+            position: absolute;
+            bottom: 0px;
+        }
+
+        .main-header {
+            width: 100%;
+            height: 50px;
+            padding: 2px;
+            line-height: 50px;
+            background: white;
+            color: #333;
+            position: absolute;
+            bottom: 0px;
+        }
+
+        hr {
+            border: 2px solid black double;
+        }
     </style>
     <link rel="stylesheet" href="">
-    <title>Kwitansi Denda</title>
+    <title>@yield('judul')</title>
 </head>
 
 <body>
@@ -96,12 +129,12 @@
         <tbody>
             <tr>
                 <td>{{ $data->kode_transaksi }}</td>
-                <td>{{ $data->anggota->user->name }}</td>
+                <td>{{ $data->anggota->nama }}</td>
                 <td>{{ $data->buku->judul }}</td>
                 <td> {{date('d/m/y', strtotime($data->tgl_pinjam))}}</td>
                 <td> {{date('d/m/y', strtotime($data->tgl_kembali))}}</td>
                 <td>{{ $data->status }}</td>
-                <td><span class="badge badge-danger">Rp. {{ number_format($data->ket ,0)}}</span></td>
+                <td><span class="badge badge-danger">Rp. {{ number_format($data->denda ,0)}}</span></td>
                 @if( $data->status_denda==1)
                 <td> <span class="label label-danger">Belum Lunas</span></td>
                 @else($data->status_denda==2)
@@ -110,7 +143,7 @@
             </tr>
         </tbody>
     </table>
-    <p class="right">Tanjung Jabung Barat {{$tgl}}</p>
+    <p class="right">Jambi, {{$tgl}}</p>
 
     <br>
     <p class="right">Admin</p>
