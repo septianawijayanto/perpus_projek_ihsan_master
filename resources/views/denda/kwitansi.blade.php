@@ -110,7 +110,7 @@
 </head>
 
 <body>
-    <h1 class="center">SMA Negeri 2 Tanjung Jabung Barat</h1>
+    <h1 class="center">SMP Negeri 5 Kota Jambi</h1>
     <hr>
     <h5 class="center"><u> Kwitansi Denda</u></h5>
     <table id="pseudo-demo">
