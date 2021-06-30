@@ -34,7 +34,7 @@
                     </span>
                 </a>
             </li>
-            <li class="active treeview menu-open">
+            <li class="treeview menu-open">
                 <a href="#">
                     <i class="fa fa-database"></i> <span>Master Data</span>
                     <span class="pull-right-container">
@@ -47,7 +47,7 @@
                     <li class="active"><a href="{{url('buku')}}"><i class="fa fa-circle-o"></i> Buku</a></li>
                 </ul>
             </li>
-            <li class="active treeview menu-open">
+            <li class="treeview menu-open">
                 <a href="#">
                     <i class="fa fa-pencil"></i> <span>Transaksi</span>
                     <span class="pull-right-container">
