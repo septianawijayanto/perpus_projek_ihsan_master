@@ -16,7 +16,7 @@ class BukuController extends Controller
     {
         $data = Buku::all();
         $title = 'Data Buku';
-        return view('buku.index', compact('title', 'data'));
+        return view('admin.buku.index', compact('title', 'data'));
     }
     public function create(Request $request)
     {
@@ -89,7 +89,7 @@ class BukuController extends Controller
 
 
 
-        return redirect('buku')->with('sukses', 'Data Buku Berhasil di Tambah');
+        return redirect()->back()->with('sukses', 'Data Buku Berhasil di Tambah');
     }
     public function delete($id)
     {
@@ -106,7 +106,7 @@ class BukuController extends Controller
         $title = 'Edit Buku';
 
         $data = Buku::find($id);
-        return view('buku.edit', compact('data', 'title'));
+        return view('admin.buku.edit', compact('data', 'title'));
     }
     public function update(Request $request, $id)
     {
@@ -165,7 +165,7 @@ class BukuController extends Controller
             $data['cover'] = $file->getClientOriginalName();
         }
         Buku::where('id', $id)->update($data);
-        return redirect('buku')->with('sukses', 'Buku Berhasil Diedit');
+        return redirect('admin/buku')->with('sukses', 'Buku Berhasil Diedit');
     }
     public function export()
     {

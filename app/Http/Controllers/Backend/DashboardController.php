@@ -14,13 +14,9 @@ class DashboardController extends Controller
     public function index()
     {
 
-        if (Auth::user()->role == 'admin') {
-            $data = Transaksi::where('tgl_pinjam', today())->get();
-            $title = 'Dashboard Admin';
-        } else {
-            $data = Transaksi::where('anggota_id', Auth::user()->anggota->id)->where('tgl_pinjam', today())->get();
-            $title = 'Dashboard Siswa';
-        }
+        $data = Transaksi::where('tgl_pinjam', today())->get();
+        $title = 'Dashboard Admin';
+
 
         $buku = Buku::count();
         $as = Anggota::where('jenis_anggota', 'siswa')->count();
@@ -28,6 +24,6 @@ class DashboardController extends Controller
         $ast = Anggota::where('jenis_anggota', 'staf')->count();
         $transaksi = Transaksi::where('status', 'pinjam')->count();
         $selesai = Transaksi::where('status', 'kembali')->count();
-        return view('dashboard.index', compact('title', 'buku', 'as', 'ag', 'ast', 'transaksi', 'selesai', 'data'));
+        return view('admin.dashboard.index', compact('title', 'buku', 'as', 'ag', 'ast', 'transaksi', 'selesai', 'data'));
     }
 }

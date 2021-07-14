@@ -19,6 +19,7 @@
                                     <th>No</th>
                                     <th>Kode Anggota</th>
                                     <th>Nama</th>
+                                    <th>Username</th>
                                     <th>Jenis</th>
                                     <th>Tempat Lahir</th>
                                     <th>Tanggal Lahir</th>
@@ -33,14 +34,15 @@
                                     <td>{{$e+1}}</td>
                                     <td>{{$dt->kode_anggota}}</td>
                                     <td>{{$dt->nama}}</td>
+                                    <td>{{$dt->username}}</td>
                                     <td>{{$dt->jenis_anggota}}</td>
                                     <td>{{$dt->tempat_lahir}}</td>
                                     <td>{{$dt->tgl_lahir}}</td>
                                     <td>{{$dt->no_hp}}</td>
                                     <td>{{$dt->alamat}}</td>
                                     <td>
-                                        <a href="{{url('/anggota/edit/'.$dt->id)}}" class="btn btn-success btn-sm btn-flat">Edit</a>
-                                        <a href="{{url('/anggota/delete/'.$dt->id)}}" class="btn btn-danger btn-sm btn-flat" onclick="return confirm ('Apakah Akan Anda Hapus?')">Hapus</a>
+                                        <a href="{{url('admin/anggota/edit/'.$dt->id)}}" class="btn btn-success btn-sm btn-flat">Edit</a>
+                                        <a href="{{url('admin/anggota/delete/'.$dt->id)}}" class="btn btn-danger btn-sm btn-flat" onclick="return confirm ('Apakah Akan Anda Hapus?')">Hapus</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -62,23 +64,37 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ url('anggota/create') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ url('admin/anggota/create') }}" method="POST" enctype="multipart/form-data">
                     {{csrf_field()}}
+                    <div class="form-group {{$errors->has('kode_anggota') ? 'has-error' :''}}">
+                        <label for="exampleFormControlInput1">Kode Anggota</label>
+                        <input name="kode_anggota" type="text" class="form-control" id="inputkode_anggota" placeholder="Input kode_anggota" readonly value="{{$kode}}">
+                        @if($errors->has('kode_anggota'))
+                        <span class="right label label-danger" class=" help-block">{{$errors->first('kode_anggota')}}</span>
+                        @endif
+                    </div>
+                    <div class="form-group {{$errors->has('nama') ? 'has-error' :''}}">
+                        <label for="exampleFormControlInput1">Nama</label>
+                        <input name="nama" type="text" class="form-control" id="inputnama" placeholder="Input nama" value="{{old('nama')}}">
+                        @if($errors->has('nama'))
+                        <span class="right label label-danger" class=" help-block">{{$errors->first('nama')}}</span>
+                        @endif
+                    </div>
                     <div class="row">
-                        <div class="col-lg-6">
 
-                            <div class="form-group {{$errors->has('kode_anggota') ? 'has-error' :''}}">
-                                <label for="exampleFormControlInput1">Kode Anggota</label>
-                                <input name="kode_anggota" type="text" class="form-control" id="inputkode_anggota" placeholder="Input kode_anggota" readonly value="{{$kode}}">
-                                @if($errors->has('kode_anggota'))
-                                <span class="right badge badge-danger" class=" help-block">{{$errors->first('kode_anggota')}}</span>
+                        <div class="col-lg-6">
+                            <div class="form-group {{$errors->has('username') ? 'has-error' :''}}">
+                                <label for="exampleFormControlInput1">Username</label>
+                                <input name="username" type="text" class="form-control" id="inputusername" placeholder="Input username" value="{{old('username')}}">
+                                @if($errors->has('username'))
+                                <span class="right label label-danger" class=" help-block">{{$errors->first('username')}}</span>
                                 @endif
                             </div>
-                            <div class="form-group {{$errors->has('nama') ? 'has-error' :''}}">
-                                <label for="exampleFormControlInput1">Nama</label>
-                                <input name="nama" type="text" class="form-control" id="inputnama" placeholder="Input nama" value="{{old('nama')}}">
-                                @if($errors->has('nama'))
-                                <span class="right badge badge-danger" class=" help-block">{{$errors->first('nama')}}</span>
+                            <div class="form-group {{$errors->has('password') ? 'has-error' :''}}">
+                                <label for="exampleFormControlInput1">Password</label>
+                                <input name="password" type="password" class="form-control" id="inputpassword" placeholder="Input password" value="{{old('password')}}">
+                                @if($errors->has('password'))
+                                <span class="right label label-danger" class=" help-block">{{$errors->first('password')}}</span>
                                 @endif
                             </div>
                             <div class="form-group {{$errors->has('jenis_anggota') ? 'has-error' :''}}">
@@ -90,14 +106,14 @@
                                     <option value="staf" {{(old('jenis_anggota') == '1PS')? 'selected':''}}>Staf</option>
                                 </select>
                                 @if($errors->has('jurusan'))
-                                <span class="right badge badge-danger" class=" help-block">{{$errors->first('jurusan')}}</span>
+                                <span class="right label label-danger" class=" help-block">{{$errors->first('jurusan')}}</span>
                                 @endif
                             </div>
                             <div class="form-group {{$errors->has('tempat_lahir') ? 'has-error' :''}}">
                                 <label for="exampleFormControlTextarea1">Tempat Lahir</label>
                                 <textarea name="tempat_lahir" class="form-control" id="exampleFormControlTextarea1" rows="4">{{old('tempat_lahir')}}</textarea>
                                 @if($errors->has('tempat_lahir'))
-                                <span class="right badge badge-danger" class=" help-block">{{$errors->first('tempat_lahir')}}</span>
+                                <span class="right label label-danger" class=" help-block">{{$errors->first('tempat_lahir')}}</span>
                                 @endif
                             </div>
                         </div>
@@ -106,7 +122,7 @@
                                 <label for="exampleFormControlInput1">Tanggal Lahir</label>
                                 <input name="tgl_lahir" type="date" class="form-control" id="inputtgl_lahir" placeholder="Input tgl_lahir" value="{{old('tgl_lahir')}}">
                                 @if($errors->has('tgl_lahir'))
-                                <span class="right badge badge-danger" class=" help-block">{{$errors->first('tgl_lahir')}}</span>
+                                <span class="right label label-danger" class=" help-block">{{$errors->first('tgl_lahir')}}</span>
                                 @endif
                             </div>
                             <div class="form-group {{$errors->has('jk') ? 'has-error' :''}}">
@@ -117,21 +133,21 @@
                                     <option value="P" {{(old('jk') == 'P')? 'selected':''}}>Perempuan</option>
                                 </select>
                                 @if($errors->has('jk'))
-                                <span class="right badge badge-danger" class=" help-block">{{$errors->first('jk')}}</span>
+                                <span class="right label label-danger" class=" help-block">{{$errors->first('jk')}}</span>
                                 @endif
                             </div>
                             <div class="form-group {{$errors->has('no_hp') ? 'has-error' :''}}">
                                 <label for="exampleFormControlInput1">No Hp</label>
                                 <input name="no_hp" type="text" class="form-control" id="inputno_hp" placeholder="Input no_hp" value="{{old('no_hp')}}">
                                 @if($errors->has('no_hp'))
-                                <span class="right badge badge-danger" class=" help-block">{{$errors->first('no_hp')}}</span>
+                                <span class="right label label-danger" class=" help-block">{{$errors->first('no_hp')}}</span>
                                 @endif
                             </div>
                             <div class="form-group {{$errors->has('alamat') ? 'has-error' :''}}">
                                 <label for="exampleFormControlTextarea1">Alamat</label>
                                 <textarea name="alamat" class="form-control" id="exampleFormControlTextarea1" rows="4">{{old('alamat')}}</textarea>
                                 @if($errors->has('alamat'))
-                                <span class="right badge badge-danger" class=" help-block">{{$errors->first('alamat')}}</span>
+                                <span class="right label label-danger" class=" help-block">{{$errors->first('alamat')}}</span>
                                 @endif
                             </div>
                         </div>

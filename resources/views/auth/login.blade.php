@@ -39,15 +39,15 @@
             </div>
             <!-- <p class="login-box-msg">Sign in to start your session</p> -->
 
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST" action="{{ url('post/login') }}">
                 {{ csrf_field() }}
                 <div class="form-group has-feedback">
-                    <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
+                    <input type="text" class="form-control" name="username" value="{{ old('username') }}" placeholder="Username">
 
-                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                    @if ($errors->has('email'))
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    @if ($errors->has('username'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('email') }}</strong>
+                        <strong>{{ $errors->first('username') }}</strong>
                     </span>
                     @endif
                 </div>
@@ -60,6 +60,14 @@
                         <strong>{{ $errors->first('password') }}</strong>
                     </span>
                     @endif
+                </div>
+                <div class="form-group has-feedback">
+                    <select class="form-control" name="masuk_sebagai" id="masuk_sebagai" required>
+                        <option value="">--Login Sebagai--</option>
+                        <option value="admin">Admin</option>
+                        <option value="anggota">Anggota</option>
+                    </select>
+
                 </div>
 
                 <div class="row">
@@ -100,6 +108,7 @@
     <script src="{{asset('adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
     <!-- iCheck -->
     <script src="{{asset('adminlte/plugins/iCheck/icheck.min.js')}}"></script>
+    <script src="{{ asset('js/sweetalert.min.js') }}"></script>
     <script>
         $(document).ready(function() {
             $('.custom-control-input').click(function() {
@@ -110,7 +119,23 @@
                 }
             });
         });
+        $(document).ready(function() {
+
+            var flash = "{{ Session::has('sukses') }}";
+            if (flash) {
+                var pesan = "{{ Session::get('sukses') }}"
+                swal("Sukses", pesan, "success");
+            }
+
+            var gagal = "{{ Session::has('gagal') }}";
+            if (gagal) {
+                var pesan = "{{ Session::get('gagal') }}"
+                swal("Error", pesan, "error");
+            }
+
+        });
     </script>
+
 </body>
 
 </html>

@@ -7,18 +7,18 @@
                 <p>
                     <button class="btn btn-sm btn-flat btn-warning btn-refresh"><i class="fa fa-refresh"></i> Refresh</button>
 
-                    <a href="{{url('/laporan/pdf')}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-print"></i> Laporan Semua Transaksi</a>
+                    <a href="{{url('admin/laporan/pdf')}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-print"></i> Laporan Semua Transaksi</a>
 
-                    <a href="{{url('/laporan/peminjamanpdf?status=pinjam')}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-print"></i> Laporan Sedang Di pinjam</a>
+                    <a href="{{url('admin/laporan/peminjamanpdf?status=pinjam')}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-print"></i> Laporan Sedang Di pinjam</a>
 
                     <button class="btn btn-primary btn-sm btn-flat btn-priodepdf" data-toggle="modal" data-target="#modal"><i class="fa fa-print"></i> Laporan Periode</button>
 
-                    <a href="{{url('/laporan/peminjamanpdf?status=kembali')}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-print"></i> Laporan Pengembalian</a>
+                    <a href="{{url('admin/laporan/peminjamanpdf?status=kembali')}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-print"></i> Laporan Pengembalian</a>
 
 
-                    <a href="{{url('/laporan/anggotapdf')}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-print"></i> Laporan Anggota</a>
+                    <a href="{{url('admin/laporan/anggotapdf')}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-print"></i> Laporan Anggota</a>
 
-                    <a href="{{url('/laporan/bukupdf')}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-print"></i> Laporan Buku</a>
+                    <a href="{{url('admin/laporan/bukupdf')}}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-print"></i> Laporan Buku</a>
 
                 </p>
             </div>
@@ -48,7 +48,21 @@
                                     <td>{{$dt->anggota->nama}}</td>
                                     <td>{{$dt->tgl_pinjam}}</td>
                                     <td>{{$dt->tgl_kembali}}</td>
-                                    <td>{{$dt->status}}</td>
+                                    <td>
+                                        @if($dt->status=='proses')
+                                        <span class="label label-info">Proses</span>
+                                        @elseif($dt->status=='pinjam')
+                                        <span class="label label-primary">Dipinjam</span>
+                                        @elseif($dt->status=='kembali')
+                                        <span class="label label-success">Kembali</span>
+                                        @elseif($dt->status=='rusak')
+                                        <span class="label label-danger">Rusak</span>
+                                        @elseif($dt->status=='hilang')
+                                        <span class="label label-warning">Hilang</span>
+                                        @else
+                                        <span class="label label-warning">Ditolak</span>
+                                        @endif
+                                    </td>
                                     <td>Rp. {{number_format($dt->denda)}}</td>
                                 </tr>
                                 @endforeach
@@ -65,7 +79,7 @@
                                 </div>
                                 <div class="modal-body">
 
-                                    <form role="form" action="{{ url('laporan/periodepdf') }}" method="get">
+                                    <form role="form" action="{{ url('admin/laporan/periodepdf') }}" method="get">
                                         <div class="box-body">
 
                                             <div class="form-group">

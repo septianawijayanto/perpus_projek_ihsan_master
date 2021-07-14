@@ -219,7 +219,7 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="{{asset('gambar/icon.png')}}" class="user-image" alt="User Image">
-                        <span class="hidden-xs">{{Auth::user()->name}}</span>
+                        <span class="hidden-xs">{{Session::get('nama')}}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
@@ -227,8 +227,8 @@
                             <img src="{{asset('gambar/icon.png')}}" class="img-circle" alt="User Image">
 
                             <p>
-                                {{Auth::user()->name}}
-                                <small>{{Auth::user()->role}}</small>
+                                {{Session::get('nama')}}
+                                <small></small>
                             </p>
                         </li>
                         <!-- Menu Body -->

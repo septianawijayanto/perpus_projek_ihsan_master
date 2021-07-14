@@ -23,14 +23,14 @@
                                     <th>Tgl Kembali</th>
                                     <th>Status</th>
                                     <th>Denda</th>
-                                    <th>Status Denda</th>
-                                    @if(Auth::user()->role=='admin')
                                     <th>Aksi</th>
-                                    @endif
+
                                 </tr>
                             </thead>
+
                             <tbody>
                                 @foreach ($data as $e=>$dt)
+
                                 <tr>
                                     <td>{{$e+1}}</td>
                                     <td>{{$dt->kode_transaksi}}</td>
@@ -38,20 +38,28 @@
                                     <td>{{$dt->anggota->nama}}</td>
                                     <td>{{$dt->tgl_pinjam}}</td>
                                     <td>{{$dt->tgl_kembali}}</td>
-                                    <td>{{$dt->status}}</td>
-                                    <td>Rp. {{number_format($dt->denda)}}</td>
-                                    <td>{{$dt->status_denda}}</td>
-                                    @if(Auth::user()->role=='admin')
                                     <td>
-                                        @if($dt->status_denda=='belum lunas')
-                                        <a href="{{url('/denda/lunasi/'.$dt->id)}}" class="btn btn-success btn-sm btn-flat">Lunasi</a>
-                                        @elseif($dt->status_denda=='lunas')
-                                        <a href="{{url('/denda/kwitansi/'.$dt->id)}}" class="btn btn-success btn-sm btn-flat">Kwitansi</a>
-
+                                        @if($dt->status=='proses')
+                                        <span class="label label-info">Proses</span>
+                                        @elseif($dt->status=='pinjam')
+                                        <span class="label label-primary">Dipinjam</span>
+                                        @elseif($dt->status=='kembali')
+                                        <span class="label label-success">Kembali</span>
+                                        @elseif($dt->status=='rusak')
+                                        <span class="label label-danger">Rusak</span>
+                                        @elseif($dt->status=='hilang')
+                                        <span class="label label-warning">Hilang</span>
+                                        @else
+                                        <span class="label label-warning">Ditolak</span>
                                         @endif
-
                                     </td>
-                                    @endif
+                                    <td>Rp. {{number_format($dt->denda)}}</td>
+                                    <td>
+
+                                        @if($dt->status=='pinjam')
+                                        <a href="{{url('admin/pengembalian/kembali/'.$dt->id)}}" class="btn btn-danger btn-sm btn-flat">Kembali</a>
+                                        @endif
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

@@ -19,13 +19,10 @@ class DendaController extends Controller
 
         $anggota = Anggota::get();
         $buku = Buku::where('jml_buku', '>', 0)->get();
-        if (Auth::user()->role == 'admin') {
-            $data = Transaksi::whereIn('status_denda', ['belum lunas', 'lunas'])->get();
-        } else {
-            $data = Transaksi::whereIn('status_denda', ['belum lunas', 'lunas'])->where('anggota_id', Auth::user()->anggota->id)->get();
-        }
+
+        $data = Transaksi::whereIn('status_denda', ['belum lunas', 'lunas'])->get();
         $title = 'Denda';
-        return view('denda.index', compact('title', 'data', 'anggota', 'buku'));
+        return view('admin.denda.index', compact('title', 'data', 'anggota', 'buku'));
     }
     public function bayar($id)
     {
@@ -37,7 +34,7 @@ class DendaController extends Controller
     {
         $tgl = date('d F y');
         $data = Transaksi::find($id);
-        $pdf = PDF::loadview('denda.kwitansi', compact('data', 'tgl'))->setPaper('a5', 'landscape');
+        $pdf = PDF::loadview('admin.denda.kwitansi', compact('data', 'tgl'))->setPaper('a5', 'landscape');
         return $pdf->stream('kwitansi' . date('Y-m-d_H:i:s') . '.pdf');
     }
 }

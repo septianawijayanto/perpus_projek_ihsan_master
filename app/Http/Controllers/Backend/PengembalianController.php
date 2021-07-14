@@ -15,17 +15,13 @@ class PengembalianController extends Controller
 {
     public function index()
     {
-        $user = User::get();
         $anggota = Anggota::get();
         $buku = Buku::where('jml_buku', '>', 0)->get();
-        if (Auth::user()->role == 'admin') {
-            $data = Transaksi::orderBy('id', 'DESC')->get();
-        } else {
-            $data = Transaksi::where('anggota_id', Auth::user()->anggota->id)->where('status', 'kembali')->orderBy('id', 'DESC')->get();
-        }
+
+        $data = Transaksi::orderBy('id', 'DESC')->get();
 
         $title = 'Pengembalian';
-        return view('pengembalian.index', compact('title', 'data', 'anggota', 'user', 'buku'));
+        return view('admin.pengembalian.index', compact('title', 'data', 'anggota', 'buku'));
     }
     public function kembalikan($id)
     {

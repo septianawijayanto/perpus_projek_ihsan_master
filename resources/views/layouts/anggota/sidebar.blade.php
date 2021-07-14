@@ -27,43 +27,22 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
             <li>
-                <a href="{{route('dashboard')}}">
+                <a href="{{route('adashboard')}}">
                     <i class="fa fa-home"></i> <span>Dashboard</span>
                     <span class="pull-right-container">
                         <small class="label pull-right bg-green">new</small>
                     </span>
                 </a>
             </li>
-            <li class="treeview menu-open">
-                <a href="#">
-                    <i class="fa fa-database"></i> <span>Master Data</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{route('anggota')}}"><i class="fa fa-circle-o"></i> Anggota</a></li>
-                    <li class="active"><a href="{{route('admin')}}"><i class="fa fa-circle-o"></i> Admin</a></li>
-                    <li class="active"><a href="{{route('buku')}}"><i class="fa fa-circle-o"></i> Buku</a></li>
-                </ul>
-            </li>
-            <li class="treeview menu-open">
-                <a href="#">
-                    <i class="fa fa-pencil"></i> <span>Transaksi</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{route('peminjaman')}}"><i class="fa fa-circle-o"></i> Peminjaman</a></li>
-                    <li class="active"><a href="{{route('pengembalian')}}"><i class="fa fa-circle-o"></i> Pengembalian</a></li>
-                    <li class="active"><a href="{{route('denda')}}"><i class="fa fa-circle-o"></i> Denda</a></li>
 
-                </ul>
+            <li>
+                <a href="{{route('abuku')}}">
+                    <i class="fa fa-book"></i> <span>Buku</span>
+                </a>
             </li>
             <li>
-                <a href="{{route('laporan')}}">
-                    <i class="fa fa-file"></i> <span>Laporan</span>
+                <a href="{{route('atransaksi')}}">
+                    <i class="fa fa-file"></i> <span>Transaksi</span>
                 </a>
             </li>
             <li>
