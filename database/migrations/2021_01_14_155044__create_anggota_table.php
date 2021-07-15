@@ -17,8 +17,8 @@ class CreateAnggotaTable extends Migration
             $table->id();
             $table->string('kode_anggota', 15);
             $table->string('nama', 50);
-            $table->string('username')->unique();
-            $table->string('password');
+            $table->string('username', 50)->unique();
+            $table->string('password', 191);
             $table->enum('jenis_anggota', ['siswa', 'guru', 'staf']);
             $table->string('tempat_lahir', 50);
             $table->date('tgl_lahir');

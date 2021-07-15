@@ -19,7 +19,7 @@ class CreateBukuTable extends Migration
             $table->string('judul', 90);
             $table->string('isbn', 25)->nullable();
             $table->string('pengarang', 50)->nullable();
-            $table->string('penerbit')->nullable();
+            $table->string('penerbit', 191)->nullable();
             $table->integer('tahun_terbit')->nullable();
             $table->integer('jml_buku');
             $table->integer('jml_dipinjam')->nullable();
@@ -28,7 +28,7 @@ class CreateBukuTable extends Migration
             $table->string('sumber', 50);
             $table->text('deskripsi')->nullable();
             $table->string('lokasi', 15);
-            $table->string('cover')->nullable();
+            $table->string('cover', 191)->nullable();
             $table->timestamps();
         });
     }
