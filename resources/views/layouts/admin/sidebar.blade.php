@@ -43,8 +43,8 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{route('anggota')}}"><i class="fa fa-circle-o"></i> Anggota</a></li>
-                    <li class="active"><a href="{{route('admin')}}"><i class="fa fa-circle-o"></i> Admin</a></li>
-                    <li class="active"><a href="{{route('buku')}}"><i class="fa fa-circle-o"></i> Buku</a></li>
+                    <li><a href="{{route('admin')}}"><i class="fa fa-circle-o"></i> Admin</a></li>
+                    <li><a href="{{route('buku')}}"><i class="fa fa-circle-o"></i> Buku</a></li>
                 </ul>
             </li>
             <li class="treeview menu-open">
@@ -56,8 +56,8 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{route('peminjaman')}}"><i class="fa fa-circle-o"></i> Peminjaman</a></li>
-                    <li class="active"><a href="{{route('pengembalian')}}"><i class="fa fa-circle-o"></i> Pengembalian</a></li>
-                    <li class="active"><a href="{{route('denda')}}"><i class="fa fa-circle-o"></i> Denda</a></li>
+                    <li><a href="{{route('pengembalian')}}"><i class="fa fa-circle-o"></i> Pengembalian</a></li>
+                    <li><a href="{{route('denda')}}"><i class="fa fa-circle-o"></i> Denda</a></li>
 
                 </ul>
             </li>

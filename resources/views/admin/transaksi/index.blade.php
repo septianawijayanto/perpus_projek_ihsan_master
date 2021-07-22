@@ -23,7 +23,6 @@
                                     <th>Tgl Pinjam</th>
                                     <th>Tgl Kembali</th>
                                     <th>Status</th>
-                                    <th>Denda</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -53,13 +52,15 @@
                                         <span class="label label-warning">Ditolak</span>
                                         @endif
                                     </td>
-                                    <td>Rp. {{number_format($dt->denda)}}</td>
                                     <td>
                                         @if($dt->status=='proses')
-                                        <a href="{{url('admin/transaksi/setujui/'.$dt->id)}}" class="btn btn-primary btn-sm btn-flat">Setujui</a>
-                                        <a href="{{url('admin/transaksi/tolak/'.$dt->id)}}" class="btn btn-danger btn-sm btn-flat">Tolak</a>
+                                        <button data-toggle="modal" data-target="#modalsetujui-{{$dt->id}}" class="btn btn-primary btn-xs " class="fa fa-check">Setujui</button>
+
+                                        <!-- <a href="{{url('admin/transaksi/setujui/'.$dt->id)}}" class="btn btn-primary btn-xs ">Setujui</a> -->
+                                        <a href="{{url('admin/transaksi/tolak/'.$dt->id)}}" class="btn btn-danger btn-xs ">Tolak</a>
                                         @elseif($dt->status=='pinjam')
-                                        <a href="{{url('admin/transaksi/perpanjang/'.$dt->id)}}" class="btn btn-success btn-sm btn-flat">Perpanjang</a>
+                                        <!-- <a href="{{url('admin/transaksi/perpanjang/'.$dt->id)}}" class="btn btn-success btn-xs btn-flat">Perpanjang</a> -->
+
                                         @endif
                                     </td>
                                 </tr>
@@ -116,6 +117,13 @@
                         <span class="right label label-danger" class=" help-block">{{$errors->first('buku_id')}}</span>
                         @endif
                     </div>
+                    <div class="form-group {{$errors->has('tgl_kembali') ? 'has-error' :''}}">
+                        <label for="exampleFormControlInput1">Tanggal Kembali</label>
+                        <input name="tgl_kembali" type="date" class="form-control" id="inputkode" placeholder="Input kode" value="">
+                        @if($errors->has('tgl_kembali'))
+                        <span class="right label label-danger" class=" help-block">{{$errors->first('nisn')}}</span>
+                        @endif
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa  fa-power-off"></i> Tutup</button>
                         <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
@@ -125,6 +133,37 @@
         </div>
     </div>
 </div>
+<!--Modal-->
+
+<!-- Modal Hilang-->
+@foreach($data as $setujui)
+<div class="modal fade" id="modalsetujui-{{ $setujui->id }}" tabindex=" -1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Setujui Pinjaman</h5>
+            </div>
+            <div class="modal-body">
+                <form action="{{ url('admin/transaksi/setujui/'.$setujui->id) }}" method="POST" enctype="multipart/form-data">
+                    {{csrf_field()}}
+                    <div class="form-group {{$errors->has('tgl_kembali') ? 'has-error' :''}}">
+                        <label for="exampleFormControlInput1">Tanggal Kembali</label>
+                        <input name="tgl_kembali" type="date" class="form-control" id="inputkode" placeholder="Input kode" value="">
+                        @if($errors->has('tgl_kembali'))
+                        <span class="right label label-danger" class=" help-block">{{$errors->first('nisn')}}</span>
+                        @endif
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dixsiss="modal"><i class="fa  fa-power-off"></i> Tutup</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+<!-- Modal Rusak-->
 @endsection
 
 @section('scripts')

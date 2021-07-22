@@ -22,7 +22,6 @@
                                     <th>Tgl Pinjam</th>
                                     <th>Tgl Kembali</th>
                                     <th>Status</th>
-                                    <th>Denda</th>
                                     <th>Aksi</th>
 
                                 </tr>
@@ -53,11 +52,13 @@
                                         <span class="label label-warning">Ditolak</span>
                                         @endif
                                     </td>
-                                    <td>Rp. {{number_format($dt->denda)}}</td>
                                     <td>
 
                                         @if($dt->status=='pinjam')
-                                        <a href="{{url('admin/pengembalian/kembali/'.$dt->id)}}" class="btn btn-danger btn-sm btn-flat">Kembali</a>
+                                        <a href="{{url('admin/pengembalian/kembali/'.$dt->id)}}" class="btn btn-success btn-xs ">Kembali</a>
+                                        <a href="{{url('admin/pengembalian/rusak/'.$dt->id)}}" class="btn btn-danger btn-xs ">Rusak</a>
+                                        <a href="{{url('admin/pengembalian/hilang/'.$dt->id)}}" class="btn btn-warning btn-xs">Hilang</a>
+
                                         @endif
                                     </td>
                                 </tr>
@@ -71,11 +72,12 @@
     </div>
 </div>
 
+
 @endsection
 
 @section('scripts')
 
-<script type="text/javascript">
+<script type=" text/javascript">
     $(document).ready(function() {
 
         // btn refresh

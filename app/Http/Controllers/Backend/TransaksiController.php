@@ -59,21 +59,24 @@ class TransaksiController extends Controller
                     'kode.required' => 'isbn Wajib di Isi',
                     'judul.required' => 'Judul Wajib di Isi',
                     'nama.required' => 'nama Wajib di Isi',
+                    'tgl_kembali.required' => 'Tanggal Kembali Wajib di Isi',
                 ];
                 //dd($request->all());
                 $this->validate($request, [
                     'buku_id' => 'required',
                     'anggota_id' => 'required',
+                    'tgl_kembali' => 'required',
                 ], $messages);
 
                 // DD($request->all());
                 $transaksi = Transaksi::create([
                     'kode_transaksi' => $request->get('kode_transaksi'),
                     'tgl_pinjam' => Date('Y-m-d', strtotime(Carbon::today()->toDateString())),
-                    'tgl_kembali' => Date('Y-m-d', strtotime(Carbon::today()->addDay(7)->toDateString())),
+                    'tgl_kembali' => $request->get('tgl_kembali'),
+                    // 'tgl_kembali' => Date('Y-m-d', strtotime(Carbon::today()->addDay(7)->toDateString())),
                     'buku_id' => $request->get('buku_id'),
                     'anggota_id' => $request->get('anggota_id'),
-                    'denda' => 0,
+                    // 'denda' => 0,
                     'status' => 'pinjam'
                 ]);
 
@@ -90,81 +93,46 @@ class TransaksiController extends Controller
         } else {
             return  redirect()->back()->with('gagal', 'Peminjaman Maksimal');
         }
-
-        $cek = Transaksi::where('status', 'pinjam')->where('anggota_id', $request->get('anggota_id'))->count();
-        if ($cek < 3) {
-            if (Transaksi::where('anggota_id', $request->get('anggota_id'))->where('buku_id', $request->get('buku_id'))->where('status', 'pinjam')->exists()) {
-                return redirect()->back()->with('gagal', 'Buku Telah dipinjam');
-            } else {
-                $messages = [
-                    'required' => ':attribute wajib diisi!',
-                    'min' => ':attribute harus diisi minimal :min karakter!',
-                    'max' => ':attribute harus diisi maksimal :max karakter!',
-                    'kode.required' => 'isbn Wajib di Isi',
-                    'judul.required' => 'Judul Wajib di Isi',
-                    'nama.required' => 'nama Wajib di Isi',
-
-                ];
-                //dd($request->all());
-                $this->validate($request, [
-                    'buku_id' => 'required',
-                ], $messages);
-                // DD($request->all());
-                $transaksi = Transaksi::create([
-                    'kode_transaksi' => $request->get('kode_transaksi'),
-                    'tgl_pinjam' => Date('Y-m-d', strtotime(Carbon::today()->toDateString())),
-                    'tgl_kembali' => Date('Y-m-d', strtotime(Carbon::today()->addDay(7)->toDateString())),
-                    'buku_id' => $request->get('buku_id'),
-                    'anggota_id' => $request->get('anggota_id'),
-                    'denda' => 0,
-                    'status' => 'proses'
-                ]);
-
-
-                // $transaksi->buku->where('id', $transaksi->buku_id)
-                //     ->update([
-                //         'jml_buku' => ($transaksi->buku->jml_buku - 1),
-                //         'jml_dipinjam' => $transaksi->buku->jml_dipinjam + 1,
-                //     ]);
-
-                // Transaksi::insert($data);
-                return redirect()->back()->with('sukses', 'Transaksi Berhasil ditambah');
-            }
-        } else {
-            return  redirect()->back()->with('gagal', 'Peminjaman Maksimal');
-        }
     }
-    public function setujui($id)
+    public function setujui(Request $request, $id)
     {
-        $data = Transaksi::find($id);
-        $buku_id = $data->buku_id;
-        $bk = Buku::find($buku_id);
-        $b = $bk->jml_buku;
-        $c = $b - 1;
+        if ($request->isMethod('post')) {
+            $data = Transaksi::find($id);
+            $buku_id = $data->buku_id;
+            $bk = Buku::find($buku_id);
+            $b = $bk->jml_buku;
+            $c = $b - 1;
 
 
-        $dipinjam = $bk->jml_dipinjam;
-        $d = $dipinjam + 1;
+            $dipinjam = $bk->jml_dipinjam;
+            $d = $dipinjam + 1;
 
-        $cek = Buku::where('id', $buku_id)->where('jml_buku', '>', 0)->count();
-        if ($cek) {
-            Transaksi::where('id', $id)->update(['status' => 'pinjam']);
-            Buku::where('id', $buku_id)
-                ->update([
-                    'jml_buku' => $c,
-                    'jml_dipinjam' => $d,
+            $cek = Buku::where('id', $buku_id)->where('jml_buku', '>', 0)->count();
+            if ($cek) {
+                Transaksi::where('id', $id)->update([
+                    'status' => 'pinjam',
+                    'tgl_kembali' => $request->tgl_kembali,
                 ]);
+                Buku::where('id', $buku_id)
+                    ->update([
+                        'jml_buku' => $c,
+                        'jml_dipinjam' => $d,
+                    ]);
 
-            return redirect()->back()->with('sukses', 'Transaksi Berhasil disetujui');
-        } else {
-            Transaksi::where('id', $id)->update(['status' => 'tolak']);
-            return redirect()->back()->with('gagal', 'Buku Kosong Transaksi Ditolak');
+                return redirect()->back()->with('sukses', 'Transaksi Berhasil disetujui');
+            } else {
+                Transaksi::where('id', $id)->update([
+                    'status' => 'tolak',
+                    'tgl_kembali' => today(),
+                ]);
+                return redirect()->back()->with('gagal', 'Buku Kosong Transaksi Ditolak');
+            }
         }
     }
     public function tolak($id)
     {
         $data = Transaksi::find($id);
-        Transaksi::where('id', $id)->update(['status' => 'tolak']);
+        Transaksi::where('id', $id)->update(['status' => 'tolak', 'tgl_kembali' => today()]);
 
         return redirect()->back()->with('sukses', 'Transaksi Ditolak');
     }

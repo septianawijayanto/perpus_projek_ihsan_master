@@ -35,7 +35,7 @@
                                     <th>Tgl Pinjam</th>
                                     <th>Tgl Kembali</th>
                                     <th>Status</th>
-                                    <th>Denda</th>
+                                    <th>Status Ganti</th>
                             </thead>
 
                             <tbody>
@@ -63,7 +63,15 @@
                                         <span class="label label-warning">Ditolak</span>
                                         @endif
                                     </td>
-                                    <td>Rp. {{number_format($dt->denda)}}</td>
+                                    <td>
+                                        @if($dt->status_ganti=='sudah')
+                                        <span class="label label-info">Sudah Diganti</span>
+                                        @elseif($dt->status_ganti=='belom')
+                                        <span class="label label-primary">Belum Diganti</span>
+                                        @else
+
+                                        @endif
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

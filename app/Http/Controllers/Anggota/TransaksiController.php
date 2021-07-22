@@ -64,9 +64,9 @@ class TransaksiController extends Controller
                     'anggota_id' => Session::get('id'),
                     'kode_transaksi' => $request->get('kode_transaksi'),
                     'tgl_pinjam' => Date('Y-m-d', strtotime(Carbon::today()->toDateString())),
-                    'tgl_kembali' => Date('Y-m-d', strtotime(Carbon::today()->addDay(7)->toDateString())),
+                    // 'tgl_kembali' => Date('Y-m-d', strtotime(Carbon::today()->addDay(7)->toDateString())),
                     'buku_id' => $request->get('buku_id'),
-                    'denda' => 0,
+                    // 'denda' => 0,
                     'status' => 'proses'
                 ]);
                 return redirect()->back()->with('sukses', 'Transaksi Berhasil ditambah');

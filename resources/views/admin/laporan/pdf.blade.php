@@ -123,7 +123,7 @@
                 <td>Tgl Pinjam</td>
                 <td>Tgl Kembali</td>
                 <td>Status</td>
-                <td>Denda</td>
+                <td>Status Ganti</td>
             </tr>
         </thead>
 
@@ -138,8 +138,15 @@
                 <td>{{$dt->tgl_pinjam}}</td>
                 <td>{{$dt->tgl_kembali}}</td>
                 <td>{{$dt->status}}</td>
-                <td>Rp. {{number_format($dt->denda)}}</td>
+                <td>
+                    @if($dt->status_ganti=='sudah')
+                    <span class="label label-info">Sudah Diganti</span>
+                    @elseif($dt->status_ganti=='belom')
+                    <span class="label label-primary">Belum Diganti</span>
+                    @else
 
+                    @endif
+                </td>
             </tr>
             @endforeach
         </tbody>

@@ -22,9 +22,11 @@ class CreateBukuTable extends Migration
             $table->string('penerbit', 191)->nullable();
             $table->integer('tahun_terbit')->nullable();
             $table->integer('jml_buku');
+            $table->integer('jml_awal')->nullable();
             $table->integer('jml_dipinjam')->nullable();
             $table->integer('rusak')->nullable();
             $table->integer('hilang')->nullable();
+            $table->integer('diganti')->nullable();        
             $table->string('sumber', 50);
             $table->text('deskripsi')->nullable();
             $table->string('lokasi', 15);

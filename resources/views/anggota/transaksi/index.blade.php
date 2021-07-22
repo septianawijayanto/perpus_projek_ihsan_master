@@ -22,7 +22,7 @@
                                     <th>Peminjam</th>
                                     <th>Tgl Pinjam</th>
                                     <th>Tgl Kembali</th>
-                                    <th>Denda</th>
+                                    <th>Status Ganti</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
@@ -37,12 +37,12 @@
                                     <td>{{$dt->tgl_pinjam}}</td>
                                     <td>{{$dt->tgl_kembali}}</td>
                                     <td>
-                                        @if($dt->status_denda=='belum lunas')
-                                        <span class="label label-warning">Rp. {{number_format($dt->denda)}} (BL) </span>
-                                        @elseif($dt->status_denda=='lunas')
-                                        <span class="label label-success">Rp. {{number_format($dt->denda)}} (L)</span>
+                                        @if($dt->status_ganti=='sudah')
+                                        <span class="label label-info">Sudah Diganti</span>
+                                        @elseif($dt->status_ganti=='belom')
+                                        <span class="label label-primary">Belum Diganti</span>
                                         @else
-                                        <span class="label label-success">Rp. {{number_format($dt->denda)}}</span>
+
                                         @endif
                                     </td>
                                     <td>

@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Buku extends Model
 {
     protected $table = 'buku';
-    protected $fillable = ['id', 'kode_buku', 'sumber', 'judul', 'isbn', 'pengarang', 'penerbit', 'tahun_terbit', 'jml_buku', 'jml_dipinjam', 'deskripsi', 'lokasi', 'cover'];
+    // protected $fillable = ['id', 'kode_buku', 'sumber', 'judul', 'isbn', 'pengarang', 'penerbit', 'tahun_terbit', 'jml_buku', 'jml_dipinjam', 'deskripsi', 'lokasi', 'cover'];
+    protected $guarded = [];
     public function transaksi()
     {
         return $this->hasMany(Transaksi::class);

@@ -1,4 +1,4 @@
-@extends('layouts.anggota.master')
+@extends('layouts.admin.master')
 @section('konten')
 <div class="row">
     <div class="col-md-12">
@@ -22,8 +22,7 @@
                                     <th>Tgl Pinjam</th>
                                     <th>Tgl Kembali</th>
                                     <th>Status</th>
-                                    <th>Denda</th>
-                                    <th>Status Denda</th>
+                                    <th>Status Ganti</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -36,8 +35,7 @@
                                     <td>{{$dt->anggota->nama}}</td>
                                     <td>{{$dt->tgl_pinjam}}</td>
                                     <td>{{$dt->tgl_kembali}}</td>
-                                    <td>{{$dt->status}}</td>
-                                    <td>Rp. {{number_format($dt->denda)}}</td>
+
                                     <td>
                                         @if($dt->status=='proses')
                                         <span class="label label-info">Proses</span>
@@ -54,10 +52,20 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if($dt->status_denda=='belum lunas')
-                                        <a href="{{url('admin/denda/lunasi/'.$dt->id)}}" class="btn btn-success btn-sm btn-flat">Lunasi</a>
-                                        @elseif($dt->status_denda=='lunas')
-                                        <a href="{{url('admin/denda/kwitansi/'.$dt->id)}}" class="btn btn-warning btn-sm btn-flat">Kwitansi</a>
+                                        @if($dt->status_ganti=='sudah')
+                                        <span class="label label-info">Sudah Diganti</span>
+                                        @elseif($dt->status_ganti=='belom')
+                                        <span class="label label-primary">Belum Diganti</span>
+                                        @else
+
+                                        @endif
+                                    </td>
+                                    <td>
+
+                                        @if($dt->status_ganti=='belom')
+                                        <a href="{{url('admin/denda/ganti/'.$dt->id)}}" class="btn btn-success btn-xs">Ganti</a>
+                                        @elseif($dt->status_ganti=='sudah')
+                                        <a href="{{url('admin/denda/kwitansi/'.$dt->id)}}" class="btn btn-warning btn-xs">Kwitansi</a>
 
                                         @endif
 

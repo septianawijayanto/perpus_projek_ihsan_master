@@ -122,8 +122,7 @@
                 <td>Tanggal Pinjam</td>
                 <td>Tanggal Kembali</td>
                 <td>Status Peminjaman</td>
-                <td>Denda</td>
-                <td>Status</td>
+                <td>Status Ganti</td>
             </tr>
         </thead>
         <tbody>
@@ -134,12 +133,13 @@
                 <td> {{date('d/m/y', strtotime($data->tgl_pinjam))}}</td>
                 <td> {{date('d/m/y', strtotime($data->tgl_kembali))}}</td>
                 <td>{{ $data->status }}</td>
-                <td><span class="badge badge-danger">Rp. {{ number_format($data->denda ,0)}}</span></td>
-                @if( $data->status_denda==1)
-                <td> <span class="label label-danger">Belum Lunas</span></td>
-                @else($data->status_denda==2)
-                <td> <span class="label label-primary">Lunas</span></td>
-                @endif
+                <td>
+                    @if($data->status_ganti=='sudah')
+                    <span class="label label-info">Sudah Diganti</span>
+                    @elseif($data->status_ganti=='belom')
+                    <span class="label label-primary">Belum Diganti</span>
+                    @endif
+                </td>
             </tr>
         </tbody>
     </table>

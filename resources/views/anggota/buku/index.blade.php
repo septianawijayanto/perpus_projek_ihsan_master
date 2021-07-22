@@ -6,9 +6,6 @@
             <div class="box-header">
                 <p>
                     <button class="btn btn-sm btn-flat btn-warning btn-refresh"><i class="fa fa-refresh"></i> Refresh</button>
-
-                    <button class="btn btn-primary btn-sm btn-flat" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i> Tambah Buku </button>
-
                 </p>
             </div>
             <div class="box-body">
@@ -28,12 +25,10 @@
                                     <th>Sumber</th>
                                     <th>Lokasi</th>
                                     <th>Jumlah Buku</th>
-                                   
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($data as $e=>$dt)
-
                                 <tr>
                                     <td>{{$e+1}}</td>
                                     <td><a href="{{$dt->getAvatar()}}"> <img height="70px" width=" 50px" class="" src="{{$dt->getAvatar()}}" alt="Photo"></td>
@@ -45,7 +40,6 @@
                                     <td>{{$dt->sumber}}</td>
                                     <td>{{$dt->lokasi}}</td>
                                     <td>{{$dt->jml_buku}}</td>
-                                 
                                 </tr>
                                 @endforeach
                             </tbody>

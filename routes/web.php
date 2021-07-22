@@ -52,17 +52,21 @@ Route::group(['middleware' => 'admin'], function () {
         //transaksi
         route::get('/transaksi', 'Backend\TransaksiController@index')->name('peminjaman');
         route::post('/transaksi/create', 'Backend\TransaksiController@create');
-        route::get('transaksi/setujui/{id}', 'Backend\TransaksiController@setujui');
+        // route::get('transaksi/setujui/{id}', 'Backend\TransaksiController@setujui');
+        Route::match(['get', 'post'], 'transaksi/setujui/{id}', 'Backend\TransaksiController@setujui');
+
         route::get('transaksi/tolak/{id}', 'Backend\TransaksiController@tolak');
         route::get('transaksi/perpanjang/{id}', 'Backend\TransaksiController@perpanjang');
 
         //pengembalian
         route::get('/pengembalian', 'Backend\PengembalianController@index')->name('pengembalian');
         route::get('pengembalian/kembali/{id}', 'Backend\PengembalianController@kembalikan');
+        route::get('pengembalian/rusak/{id}', 'Backend\PengembalianController@rusak');
+        route::get('pengembalian/hilang/{id}', 'Backend\PengembalianController@hilang');
 
         //denda        
         Route::get('/denda', 'Backend\DendaController@index')->name('denda');
-        Route::get('/denda/lunasi/{id}', 'Backend\DendaController@bayar');
+        Route::get('/denda/ganti/{id}', 'Backend\DendaController@ganti');
         Route::get('/denda/kwitansi/{id}', 'Backend\DendaController@kwitansi');
 
         //laporan

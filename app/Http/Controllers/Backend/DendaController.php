@@ -20,15 +20,24 @@ class DendaController extends Controller
         $anggota = Anggota::get();
         $buku = Buku::where('jml_buku', '>', 0)->get();
 
-        $data = Transaksi::whereIn('status_denda', ['belum lunas', 'lunas'])->get();
+        $data = Transaksi::whereIn('status_ganti', ['belom', 'sudah'])->get();
         $title = 'Denda';
         return view('admin.denda.index', compact('title', 'data', 'anggota', 'buku'));
     }
-    public function bayar($id)
+    public function ganti($id)
     {
         $data = Transaksi::find($id);
-        Transaksi::where('id', $id)->update(['status_denda' => 'lunas']);
-        return redirect()->back()->with('sukses', 'Denda Berhasi dilunasi');
+        $buku_id = $data->buku_id;
+        $buku = Buku::find($buku_id);
+        $sekarang = $buku->jml_buku + 1;
+        $diganti = $buku->diganti + 1;
+        Buku::where('id', $buku_id)->update([
+            'jml_buku' => $sekarang,
+            'diganti' => $diganti
+        ]);
+
+        Transaksi::where('id', $id)->update(['status_ganti' => 'sudah']);
+        return redirect()->back()->with('sukses', 'Buku Berhasil Di Ganti');
     }
     public function kwitansi($id)
     {

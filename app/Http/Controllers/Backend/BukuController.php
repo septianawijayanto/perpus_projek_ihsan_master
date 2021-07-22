@@ -66,6 +66,7 @@ class BukuController extends Controller
         $data['penerbit'] = $request->penerbit;
         $data['tahun_terbit'] = $request->tahun_terbit;
         $data['jml_buku'] = $request->jml_buku;
+        $data['jml_awal'] = $request->jml_buku;
         $data['lokasi'] = $request->lokasi;
         $data['deskripsi'] = $request->deskripsi;
         $data['created_at'] = date('Y-m-d H:i:s', strtotime(Carbon::today()->toDateString()));
@@ -155,6 +156,7 @@ class BukuController extends Controller
         $data['penerbit'] = $request->penerbit;
         $data['tahun_terbit'] = $request->tahun_terbit;
         $data['jml_buku'] = $request->jml_buku;
+        $data['jml_awal'] = $request->jml_buku;
         $data['lokasi'] = $request->lokasi;
         $data['deskripsi'] = $request->deskripsi;
         //   $data['created_at'] = date('Y-m-d H:i:s', strtotime(Carbon::today()->toDateString()));
