@@ -41,15 +41,15 @@ class TransaksiController extends Controller
         $data = Transaksi::orderBy('id', 'DESC')->get();
 
 
-        $title = 'Transaksi Peminjaman';
+        $title = 'Data Peminjaman';
         return view('admin.transaksi.index', compact('title', 'data', 'anggota', 'buku', 'kode'));
     }
     public function create(Request $request)
     {
 
-        $cek = Transaksi::where('status', 'pinjam')->where('anggota_id', $request->get('anggota_id'))->count();
-        if ($cek < 3) {
-            if (Transaksi::where('anggota_id', $request->get('anggota_id'))->where('buku_id', $request->get('buku_id'))->where('status', 'pinjam')->exists()) {
+        $cek = Transaksi::where('status', ['pinjam', 'proses'])->where('anggota_id', $request->get('anggota_id'))->count();
+        if ($cek < 10) {
+            if (Transaksi::where('anggota_id', $request->get('anggota_id'))->where('buku_id', $request->get('buku_id'))->whereIn('status', ['pinjam', 'proses'])->exists()) {
                 return redirect()->back()->with('gagal', 'Buku Telah dipinjam');
             } else {
                 $messages = [

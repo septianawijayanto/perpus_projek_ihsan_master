@@ -21,7 +21,7 @@ class DendaController extends Controller
         $buku = Buku::where('jml_buku', '>', 0)->get();
 
         $data = Transaksi::whereIn('status_ganti', ['belom', 'sudah'])->get();
-        $title = 'Denda';
+        $title = 'Data Denda';
         return view('admin.denda.index', compact('title', 'data', 'anggota', 'buku'));
     }
     public function ganti($id)

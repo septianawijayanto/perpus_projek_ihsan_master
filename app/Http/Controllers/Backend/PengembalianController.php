@@ -20,7 +20,7 @@ class PengembalianController extends Controller
 
         $data = Transaksi::orderBy('id', 'DESC')->get();
 
-        $title = 'Pengembalian';
+        $title = 'Data Pengembalian';
         return view('admin.pengembalian.index', compact('title', 'data', 'anggota', 'buku'));
     }
     public function kembalikan($id)

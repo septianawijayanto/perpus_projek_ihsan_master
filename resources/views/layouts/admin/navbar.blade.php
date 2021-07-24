@@ -5,7 +5,7 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>P</b>W</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Perpus</b>WEB</span>
+        <span class="logo-lg"><b>SI-</b>Perpustakaan</span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->
@@ -232,7 +232,7 @@
                     </p>
                 </li>
                 <!-- Menu Body -->
-                <li class="user-body">
+                {{-- <li class="user-body">
                     <div class="row">
                         <div class="col-xs-4 text-center">
                             <a href="#">Followers</a>
@@ -245,12 +245,12 @@
                         </div>
                     </div>
                     <!-- /.row -->
-                </li>
+                </li>--}}
                 <!-- Menu Footer-->
                 <li class="user-footer">
-                    <div class="pull-left">
+                    <!-- <div class="pull-left">
                         <a href="#" class="btn btn-default btn-flat">Profile</a>
-                    </div>
+                    </div> -->
                     <div class="pull-right">
                         <a href="{{url('keluar')}}" class="btn btn-default btn-flat">Keluar</a>
                     </div>

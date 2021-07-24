@@ -18,7 +18,7 @@
             <section class="content-header">
                 <h1>
                     {{$title}}
-                    <small>Version 1.0</small>
+                    <!-- <small>Version 1.0</small> -->
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-home"></i> Dashboard</a></li>
@@ -36,7 +36,7 @@
 
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
-                <b>Version</b> 1.0
+                <!-- <b>Version</b> 1.0 -->
             </div>
             <strong>Copyright &copy; 2021 <a href="#">SW Developer</a>.</strong> All rights
             reserved.

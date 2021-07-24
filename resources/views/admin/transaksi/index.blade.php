@@ -18,7 +18,14 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Kode</th>
+                                    <th>Kode Buku</th>
+                                    <th>ISBN</th>
                                     <th>Judul</th>
+                                    <th>Pengarang</th>
+                                    <th>Penerbit</th>
+                                    <th>Sumber</th>
+                                    <th>Lokasi</th>
+                                    <th>Jumlah Buku</th>
                                     <th>Peminjam</th>
                                     <th>Tgl Pinjam</th>
                                     <th>Tgl Kembali</th>
@@ -33,7 +40,14 @@
                                 <tr>
                                     <td>{{$e+1}}</td>
                                     <td>{{$dt->kode_transaksi}}</td>
+                                    <td>{{$dt->buku->kode_buku}}</td>
+                                    <td>{{$dt->buku->isbn}}</td>
                                     <td>{{$dt->buku->judul}}</td>
+                                    <td>{{$dt->buku->pengarang}}</td>
+                                    <td>{{$dt->buku->penerbit}}</td>
+                                    <td>{{$dt->buku->sumber}}</td>
+                                    <td>{{$dt->buku->lokasi}}</td>
+                                    <td>{{$dt->buku->jml_buku}}</td>
                                     <td>{{$dt->anggota->nama}}</td>
                                     <td>{{$dt->tgl_pinjam}}</td>
                                     <td>{{$dt->tgl_kembali}}</td>
