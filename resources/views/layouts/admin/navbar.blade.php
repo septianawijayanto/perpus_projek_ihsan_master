@@ -5,7 +5,7 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>P</b>W</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>SI-</b>Perpustakaan</span>
+        <span class="logo-lg"><b>SMP 5-</b>Perpustakaan</span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->
@@ -17,7 +17,7 @@
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-                {{--<!-- Messages: style can be found in dropdown.less-->
+                {{-- <!-- Messages: style can be found in dropdown.less-->
                 <li class="dropdown messages-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-envelope-o"></i>
@@ -214,25 +214,25 @@
                     <a href="#">View all tasks</a>
                 </li>
             </ul>
-        </li>--}}
-        <!-- User Account: style can be found in dropdown.less -->
-        <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="{{asset('gambar/icon.png')}}" class="user-image" alt="User Image">
-                <span class="hidden-xs">{{Session::get('nama')}}</span>
-            </a>
-            <ul class="dropdown-menu">
-                <!-- User image -->
-                <li class="user-header">
-                    <img src="{{asset('gambar/icon.png')}}" class="img-circle" alt="User Image">
+        </li> --}}
+                <!-- User Account: style can be found in dropdown.less -->
+                <li class="dropdown user user-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="{{ asset('gambar/icon.png') }}" class="user-image" alt="User Image">
+                        <span class="hidden-xs">{{ Session::get('nama') }}</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!-- User image -->
+                        <li class="user-header">
+                            <img src="{{ asset('gambar/icon.png') }}" class="img-circle" alt="User Image">
 
-                    <p>
-                        {{Session::get('nama')}}
-                        <small></small>
-                    </p>
-                </li>
-                <!-- Menu Body -->
-                {{-- <li class="user-body">
+                            <p>
+                                {{ Session::get('nama') }}
+                                <small></small>
+                            </p>
+                        </li>
+                        <!-- Menu Body -->
+                        {{-- <li class="user-body">
                     <div class="row">
                         <div class="col-xs-4 text-center">
                             <a href="#">Followers</a>
@@ -245,23 +245,23 @@
                         </div>
                     </div>
                     <!-- /.row -->
-                </li>--}}
-                <!-- Menu Footer-->
-                <li class="user-footer">
-                    <!-- <div class="pull-left">
+                </li> --}}
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+                            <!-- <div class="pull-left">
                         <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div> -->
-                    <div class="pull-right">
-                        <a href="{{url('keluar')}}" class="btn btn-default btn-flat">Keluar</a>
-                    </div>
+                            <div class="pull-right">
+                                <a href="{{ url('keluar') }}" class="btn btn-default btn-flat">Keluar</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Control Sidebar Toggle Button -->
+                <li>
+                    <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                 </li>
             </ul>
-        </li>
-        <!-- Control Sidebar Toggle Button -->
-        <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-        </li>
-        </ul>
         </div>
 
     </nav>

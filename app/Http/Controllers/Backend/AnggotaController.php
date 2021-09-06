@@ -120,7 +120,7 @@ class AnggotaController extends Controller
 
         $data['nama'] = $request->nama;
         $data['username'] = $request->username;
-        $data['password'] = $request->password;
+        $data['password'] = bcrypt($request->password);
         $data['jenis_anggota'] = $request->jenis_anggota;
         $data['tempat_lahir'] = $request->tempat_lahir;
         $data['tgl_lahir'] = $request->tgl_lahir;

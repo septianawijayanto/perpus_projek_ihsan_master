@@ -38,7 +38,7 @@
             <div class="pull-right hidden-xs">
                 <!-- <b>Version</b> 1.0 -->
             </div>
-            <strong>Copyright &copy; 2021 <a href="#">Noob Developer</a>.</strong> All rights
+            <strong>Copyright &copy; 2021 <a href="#"></a>.</strong> All rights
             reserved.
         </footer>
 

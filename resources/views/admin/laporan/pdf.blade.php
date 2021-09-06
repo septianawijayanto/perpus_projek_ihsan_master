@@ -104,6 +104,7 @@
         hr {
             border: 2px solid black double;
         }
+
     </style>
     <link rel="stylesheet" href="">
     <title>@yield('judul')</title>
@@ -112,7 +113,19 @@
 <body>
     <h1 class="center">SMP Negeri 5 Kota Jambi</h1>
     <hr>
-    <h5 class="center"><u> LAPORAN DATA TRANSAKSI</u></h5>
+    @if (request('status') == 'kembali')
+        <h5 class="center"><u> LAPORAN DATA TRANSAKSI KEMBALI</u></h5>
+    @elseif(request('status') == 'pinjam')
+        <h5 class="center"><u> LAPORAN DATA TRANSAKSI DIPINJAM</u></h5>
+    @elseif(request('status') == 'rusak')
+        <h5 class="center"><u> LAPORAN DATA TRANSAKSI RUSAK</u></h5>
+    @elseif(request('status') == 'hilang')
+        <h5 class="center"><u> LAPORAN DATA TRANSAKSI HILANG</u></h5>
+    @elseif(request('status') == 'tolak')
+        <h5 class="center"><u> LAPORAN DATA TRANSAKSI DITOLAK</u></h5>
+    @else
+        <h5 class="center"><u> LAPORAN DATA TRANSAKSI</u></h5>
+    @endif
     <table id="pseudo-demo">
         <thead>
             <tr>
@@ -128,30 +141,30 @@
         </thead>
 
         <tbody>
-            @foreach ($data as $e=>$dt)
+            @foreach ($data as $e => $dt)
 
-            <tr>
-                <td>{{$e+1}}</td>
-                <td>{{$dt->kode_transaksi}}</td>
-                <td>{{$dt->buku->judul}}</td>
-                <td>{{$dt->anggota->nama}}</td>
-                <td>{{$dt->tgl_pinjam}}</td>
-                <td>{{$dt->tgl_kembali}}</td>
-                <td>{{$dt->status}}</td>
-                <td>
-                    @if($dt->status_ganti=='sudah')
-                    <span class="label label-info">Sudah Diganti</span>
-                    @elseif($dt->status_ganti=='belom')
-                    <span class="label label-primary">Belum Diganti</span>
-                    @else
+                <tr>
+                    <td>{{ $e + 1 }}</td>
+                    <td>{{ $dt->kode_transaksi }}</td>
+                    <td>{{ $dt->buku->judul }}</td>
+                    <td>{{ $dt->anggota->nama }}</td>
+                    <td>{{ $dt->tgl_pinjam }}</td>
+                    <td>{{ $dt->tgl_kembali }}</td>
+                    <td>{{ $dt->status }}</td>
+                    <td>
+                        @if ($dt->status_ganti == 'sudah')
+                            <span class="label label-info">Sudah Diganti</span>
+                        @elseif($dt->status_ganti=='belom')
+                            <span class="label label-primary">Belum Diganti</span>
+                        @else
 
-                    @endif
-                </td>
-            </tr>
+                        @endif
+                    </td>
+                </tr>
             @endforeach
         </tbody>
     </table>
-    <p class="right">Jambi, {{ $tgl}}</p>
+    <p class="right">Jambi, {{ $tgl }}</p>
 
     <br>
     <p class="right">Admin</p>
